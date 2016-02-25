@@ -2,10 +2,12 @@ module Counter where
 
 import Html exposing (..)
 
-view : Signal.Address Int -> Int -> Html
+type alias Model = Int
+
+view : Signal.Address Int -> Model -> Html
 view address model =
   text (toString model)
 
-update : Int -> Int -> Int
+update : Int -> Model -> Model
 update action model =
   model
