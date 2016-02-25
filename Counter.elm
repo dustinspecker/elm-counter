@@ -1,13 +1,24 @@
 module Counter where
 
 import Html exposing (..)
+import Html.Events exposing (onClick)
 
 type alias Model = Int
 
-view : Signal.Address Int -> Model -> Html
-view address model =
-  text (toString model)
+type Action = Increment | Decrement
 
-update : Int -> Model -> Model
+view : Signal.Address Action -> Model -> Html
+view address model =
+  div []
+    [ button [ onClick address Decrement ] [ text "-" ]
+    , div [] [ text (toString model) ]
+    , button [ onClick address Increment ] [ text "+" ]
+    ]
+
+update : Action -> Model -> Model
 update action model =
-  model
+  case action of
+    Increment ->
+      model + 1
+    Decrement ->
+      model - 1
